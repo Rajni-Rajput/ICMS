@@ -47,34 +47,23 @@ const registerController = async(req,res)=>{
 const loginController =async (req,res) =>{
     
     try{
-        const { email, password } = req.body;
-        // const admintoken;
-        // //Check if provided credentials match admin credentials
-        // if (email === adminEmail && password === adminPassword) {
-        // // If it's admin, return success response
-        // admintoken = jwt.sign({ email: adminEmail }, process.env.JWT_SECRET, {
-        //     expiresIn: "1d",
-        // });
+        const { email, password, role } = req.body;
         
-        const isadmin = adminData.find((admin) => (
-            admin.adminEmail === email && admin.adminPassword === password
-        ));
-
-        if(isadmin){
-            console.log('pkpj')
+        // Check if provided credentials match admin credentials
+        const isAdmin = adminData.find(admin => admin.adminEmail === email && admin.adminPassword === password);
+        
+        if (isAdmin) {
             return res.status(200).send({
-                success:true,
-                message:'Admin Login Successfully!',
-                admintoken
-            })
+                success: true,
+                message: "Admin login Successfully!",
+                isAdmin:true,
+                role:'admin'
+            });
+        }
+        
 
-        return res.status(200).send({
-            success: true,
-            message: "Admin Login Successfully!"
+        else{
             
-        });
-        }else{
-            console.log('gch')
             const user=await userModel.findOne({email})
             if(!user){
                 return res.status(404).send({
@@ -94,13 +83,16 @@ const loginController =async (req,res) =>{
         return res.status(200).send({
             success:true,
             message:'Login Successfully!',
+            isAdmin: false,
             token,
+            role: 'user',
             user
         })
     }
 }
 
     catch(error){
+        console.log("eee");
         console.log(error)
         res.status(500).send({
             success:false,

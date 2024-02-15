@@ -21,25 +21,27 @@ const Form = ({formType,submitBtn,formTitle}) => {
       try{
         let response;
         if (formType === "login") {
-          // Handle login form submission
+          
           const loginData = {
             email,
-            password
+            password,
+            role
           };
           response = await axios.post('http://localhost:3033/api/v1/auth/login', loginData);
-          if (role === "user" && response.data.isadmin) {
-            return alert('Admin cannot login here.');
-          } else {
+          if (role === "user" && response.data.isAdmin) {
+            return alert('Error.');
+          }  else if (role === "admin" && !response.data.isAdmin) {
+            return alert('Invalid credentials for admin login.');
+        } else {
             if (response.status === 200 && response.data.success) {
                 // Successful login
                 return alert('Login Successfully');
             } else {
                 // Invalid Credentials or other errors
-                return alert('Not a user! Register first.');
+                return alert('Invalid Credentials');
             }
         }
-          
-        } else if (formType === "register") {
+    }else if (formType === "register") {
           // Handle register form submission
           const registerData = {
             role,
