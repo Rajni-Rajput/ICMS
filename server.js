@@ -24,7 +24,7 @@ const app = express()
 
 //middleware
 app.use(express.json())
-app.use(cors())
+app.use(cors) //for recieving and passing from backend to frontend
 app.use(morgan('dev')) //it will display a short msg on console (url,res,time)
 
 app.use('/api/v1/test',require('./routes/testRoutes'))
