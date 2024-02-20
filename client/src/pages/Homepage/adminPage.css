@@ -1,0 +1,104 @@
+.navbar {
+    background-color:#0764fd ;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color:#fff;
+    font-weight: bolder;
+    padding-right: 20px;
+    width: 100%;
+}
+/* rgb(123, 0, 255) */ 
+
+.content{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 30%;
+    color: #fff;
+}
+
+.forcolor{
+    margin-top: 50px;
+    color: rgb(255, 0, 25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn {
+    cursor: pointer;
+    color: #fff;
+}
+.card {
+    padding: 2em;
+    border: 1px solid #888;
+}
+
+.card { 
+    margin: 1rem; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+}
+
+.card-body { 
+    padding: 1rem; 
+}
+
+.card-title { 
+    font-size: 1.5rem; 
+    margin-bottom: 0.5rem; 
+}
+
+.card-subtitle { 
+    font-size: 0.9rem; 
+    margin-bottom: 1rem; 
+}
+
+.card-text { 
+    font-size: 0.9rem; 
+    margin-bottom: 0; 
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 50px;
+  }
+  
+
+  thead {
+    background-color: #f2f2f2;
+  }
+  
+  thead th {
+    padding: 8px;
+    text-align: left;
+  }
+  
+  /* Table body */
+  tbody td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+
+  tbody tr:hover {
+    background-color: #f2f2f2;
+  }
+  
+  button {
+    padding: 5px 10px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+
+  .add-btn {
+    position: absolute;
+    top: 60px;
+    right: 10px;
+}

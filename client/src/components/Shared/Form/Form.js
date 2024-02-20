@@ -33,13 +33,24 @@ const Form = ({formType,submitBtn,formTitle}) => {
           }  else if (role === "admin" && !response.data.isAdmin) {
             return alert('Invalid credentials for admin login.');
         } else {
+          if(role==='user'){
             if (response.status === 200 && response.data.success) {
                 // Successful login
-                return alert('Login Successfully');
+                navigate('/userHomepage');
             } else {
                 // Invalid Credentials or other errors
                 return alert('Invalid Credentials');
             }
+          }
+          else if(role==='admin'){
+            if (response.status === 200 && response.data.success) {
+              // Successful login
+              navigate('/adminHomepage')
+          } else {
+              // Invalid Credentials or other errors
+              return alert('Invalid Credentials');
+          }
+          }
         }
     }else if (formType === "register") {
           // Handle register form submission

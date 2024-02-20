@@ -1,17 +1,26 @@
-const mongoose =require('mongoose')
-const adminSchema = new mongoose.Schema({
-    role:{
-        type:String,
-        required:[true,'role is required'],
-        enum:['admin','user']
+const mongoose = require('mongoose');
+
+const policySchema = new mongoose.Schema({
+    email:{
+        type:String
+        // required:true
     },
-    name:{
-        type:String,
-        required: [true,'required']
+   
+    
+    policyType: {
+        type: String,
+        required: [true, 'Policy type is required'],
+        enum:['MedicalIn','MotorIn','HealthIn','LifeIn']
     },
-    password:{
-        type:String,
-        required:[true,'password is required']
+    coverage: {
+        type: String,
+        required: [true, 'Coverage details are required']
     },
-}, {timestamps:true});
-module.exports = mongoose.model('',adminSchema)
+    premium: {
+        type: Number,
+        required: [true, 'Premium amount is required']
+    }
+    
+}, { timestamps: true });
+
+module.exports = mongoose.model('Policy', policySchema);
