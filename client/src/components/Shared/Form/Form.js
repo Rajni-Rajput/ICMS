@@ -36,7 +36,7 @@ const Form = ({formType,submitBtn,formTitle}) => {
           if(role==='user'){
             if (response.status === 200 && response.data.success) {
                 // Successful login
-                navigate('/userHomepage');
+                navigate('/userHomepage',{state: {email: email}});
             } else {
                 // Invalid Credentials or other errors
                 return alert('Invalid Credentials');
