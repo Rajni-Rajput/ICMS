@@ -8,7 +8,7 @@ const cors = require('cors')
 dotenv.config()
 
 //to connect to server
-mongoose.connect('mongodb://localhost:27017/project') 
+mongoose.connect(process.env.MONGO_URL) 
 const db = mongoose.connection 
 
 db.on('error',(err)=> {
@@ -29,6 +29,7 @@ app.use(morgan('dev')) //it will display a short msg on console (url,res,time)
 
 app.use('/api/v1/test',require('./routes/testRoutes'))
 app.use('/api/v1/auth', require('./routes/authRoutes'))
+app.use('/api/v1/view',require('./routes/policyRoutes'))
 
 
 
