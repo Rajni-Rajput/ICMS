@@ -1,0 +1,320 @@
+openapi: 3.0.0
+info:
+  title: Swagger in Nodejs project
+  description: This is my api-documentation file.
+  version: 1.0.0
+servers:
+  - url: http://localhost:3033/
+    description: Local server
+paths:
+  /api/v1/test:
+    get:
+      summary: Get welcome message
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Welcome message
+                  success:
+                    type: boolean
+                    description: Indicates if the request was successful
+      tags:
+        - Test
+  
+  /api/v1/auth/reg:
+    post:
+      summary: Register a user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+                address:
+                  type: string
+                phone:
+                  type: string
+                role:
+                  type: string
+                  default: "user"
+      responses:
+        '201':
+          description: User registered successfully
+        '500':
+          description: Internal server error
+      tags:
+        - Auth
+
+  /api/v1/auth/login:
+    post:
+      summary: Login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: User logged in successfully
+        '404':
+          description: Invalid credentials
+        '500':
+          description: Internal server error
+      tags:
+        - Auth
+
+  /api/v1/view/deletePolicies:
+    post:
+      summary: Delete policies
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                _id:
+                  type: string
+      responses:
+        '200':
+          description: Policies deleted successfully
+        '404':
+          description: Policy not found
+        '500':
+          description: Internal server error
+      tags:
+        - View
+
+  /api/v1/view/listp:
+    get:
+      summary: List policies
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+      tags:
+        - View
+
+  /api/v1/view/selectPolicy:
+    post:
+      summary: Select policy
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                policyType:
+                  type: string
+                premium:
+                  type: number
+                coverage:
+                  type: string
+      responses:
+        '200':
+          description: Policy selected successfully
+        '404':
+          description: User not found
+        '500':
+          description: Internal server error
+      tags:
+        - View
+
+  /api/v1/view/userPolicyList:
+    post:
+      summary: List user policies
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+      tags:
+        - View
+
+  /api/v1/view/claimPolicy:
+    post:
+      summary: Claim policy
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                InsuranceId:
+                  type: string
+                reason:
+                  type: string
+                amount:
+                  type: number
+      responses:
+        '200':
+          description: Claim submitted successfully
+        '404':
+          description: User or Policy not found
+        '400':
+          description: Claim already exists for this InsuranceId
+        '500':
+          description: Internal server error
+      tags:
+        - View
+
+  /api/v1/view/userClaimList:
+    post:
+      summary: List user claims
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+      tags:
+        - View
+
+  /api/v1/view/listc:
+    get:
+      summary: List claims
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+      tags:
+        - View
+
+  /api/v1/view/approveClaim:
+    post:
+      summary: Approve claim
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                _id:
+                  type: string
+                remarks:
+                  type: string
+      responses:
+        '200':
+          description: Claim approved successfully
+        '404':
+          description: Claim not found
+        '500':
+          description: Internal server error
+      tags:
+        - View
+
+  /api/v1/view/rejectClaim:
+    post:
+      summary: Reject claim
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                _id:
+                  type: string
+                remarks:
+                  type: string
+      responses:
+        '200':
+          description: Claim rejected successfully
+        '404':
+          description: Claim not found
+        '500':
+          description: Internal server error
+      tags:
+        - View
+
+  /api/v1/view/addClaim:
+    post:
+      summary: Add claim
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                InsuranceId:
+                  type: string
+                reason:
+                  type: string
+                amount:
+                  type: number
+      responses:
+        '200':
+          description: Claim submitted successfully
+        '404':
+          description: User or Policy not found
+        '400':
+          description: Claim already exists for this InsuranceId
+        '500':
+          description: Internal server error
+      tags:
+        - View
+

@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 
-
 const claimSchema = new mongoose.Schema({
     email:{
         type:String
@@ -13,7 +12,7 @@ const claimSchema = new mongoose.Schema({
     },
     status: {
         type: String,
-        // enum:['pending','accepted','rejected'],
+        enum:['pending','accepted','rejected'],
         default: 'pending'
     },
     amount: {
@@ -22,7 +21,7 @@ const claimSchema = new mongoose.Schema({
     },
     residual_amount:{
         type:String,
-        required:true
+        //required:true
     },
     reason: {
         type: String,

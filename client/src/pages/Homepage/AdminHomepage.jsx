@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import PolicyCard from '../../components/Policy/PolicyCard';
+//import PolicyCard from '../../components/Policy/PolicyCard';
 import './adminPage.css'
 import { useNavigate } from 'react-router-dom';
 import PolicyForm from '../../components/Shared/Form/AddPolicyForm';
@@ -59,8 +59,8 @@ const AdminHomepage = () => {
     // Log pdata when it changes
 
     useEffect(() => {
-        console.log(pdata);
-    }, [pdata]); 
+      fetchPolicies();
+  }, []);
 
     function policies() {
         fetchPolicies();
@@ -161,7 +161,7 @@ const AdminHomepage = () => {
                 <th>Email</th>
                 <th>Status</th>
                 <th>Amount</th>
-                <th>Residual Amount</th>
+                {/* <th>Residual Amount</th> */}
                 <th>Reason</th>
                 <th>Requested Date</th>
                 <th>Edit_Status</th>
@@ -176,7 +176,7 @@ const AdminHomepage = () => {
                     <td>{claim.email}</td>
                     <td>{claim.status}</td>
                     <td>{claim.amount}</td>
-                    <td>{claim.residual_amount}</td>
+                    {/* <td>{claim.residual_amount}</td> */}
                     <td>{claim.reason}</td>
                     <td>{claim.requestedDate}</td>
                     <td>

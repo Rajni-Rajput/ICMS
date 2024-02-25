@@ -4,7 +4,6 @@ import {Link , useNavigate} from 'react-router-dom';
 import { handleLogin, handleRegister } from '../../../services/authService';
 import axios from 'axios';
 
-
 const Form = ({formType,submitBtn,formTitle}) => {
   
     const navigate =useNavigate();
@@ -15,7 +14,6 @@ const Form = ({formType,submitBtn,formTitle}) => {
     const [address,setAddress] =useState("");
     const [phone,setPhone] =useState("");
    
-
     const handleSubmit = async (e) => {
       //e.preventDefault();
       try{
@@ -37,10 +35,12 @@ const Form = ({formType,submitBtn,formTitle}) => {
             if (response.status === 200 && response.data.success) {
                 // Successful login
                 navigate('/userHomepage',{state: {email: email}});
-            } else {
+            } 
+            else {
                 // Invalid Credentials or other errors
                 return alert('Invalid Credentials');
             }
+            
           }
           else if(role==='admin'){
             if (response.status === 200 && response.data.success) {
@@ -73,7 +73,6 @@ const Form = ({formType,submitBtn,formTitle}) => {
       }
     }
 
-
   return (
     <>
       <form
@@ -94,8 +93,6 @@ const Form = ({formType,submitBtn,formTitle}) => {
       >
         <h1 className="text-center">{formTitle}</h1>
         <hr />
-
-      
 
         {formType === "login" && (
           <div className="d-flex mb-3">

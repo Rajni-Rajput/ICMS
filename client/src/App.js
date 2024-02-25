@@ -4,7 +4,7 @@ import Register from './pages/auth/Register';
 import AdminHomepage from './pages/Homepage/AdminHomepage';
 import UserHomepage from './pages/Homepage/UserHomepage';
 import PolicyForm from './components/Shared/Form/AddPolicyForm';
-import adminPolicies from './pages/Homepage/adminPolicies';
+//import adminPolicies from './pages/Homepage/adminPolicies';
 import ClaimForm from './components/Shared/Form/AddClaimForm';
 
 

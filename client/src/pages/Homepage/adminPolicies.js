@@ -1,5 +1,5 @@
 import React  from 'react';
-import PolicyForm from '../../components/Shared/Form/AddPolicyForm';
+//import PolicyForm from '../../components/Shared/Form/AddPolicyForm';
 
 
 const adminPolicies =()=>{

@@ -7,9 +7,9 @@ const ClaimForm = ({ submitBtn, formTitle , setShowClaimForm}) => {
   
     const [email, setEmail] = useState('');
     const [InsuranceId,setInsuranceId] = useState('');
-    const [status, setStatus] = useState('');
+    //const [status, setStatus] = useState('');
     const [amount, setAmount] = useState('');
-    const [residual_amount, setResidual] = useState('');
+    //const [residual_amount, setResidual] = useState('');
     const [reason, setReason] = useState('');
 
     const handleSubmit = async (e) => {
@@ -19,12 +19,12 @@ const ClaimForm = ({ submitBtn, formTitle , setShowClaimForm}) => {
             const claimData = {
                 email,
                 InsuranceId,
-                status,
+                //status,
                 amount,
-                residual_amount,
+                //residual_amount,
                 reason
             };
-            response = await axios.post('http://localhost:3033/api/v1/view/claimPolicy', claimData);
+            response = await axios.post('http://localhost:3033/api/v1/view/addClaim', claimData);
             console.log(response)
             alert('Claim added successfully!');
             setShowClaimForm(false)
@@ -51,24 +51,24 @@ const ClaimForm = ({ submitBtn, formTitle , setShowClaimForm}) => {
                 value={InsuranceId}
                 onChange={(e) => setInsuranceId(e.target.value)}
             />
-            <InputType
+            {/* <InputType
                 labelText={'Status'}
                 inputType={'text'}
                 value={status}
                 onChange={(e) => setStatus(e.target.value)}
-            />
+            /> */}
             <InputType
                 labelText={'Amount'}
                 inputType={'text'}
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
             />
-            <InputType
+            {/* <InputType
                 labelText={'Residual Amount'}
                 inputType={'text'}
                 value={residual_amount}
                 onChange={(e) => setResidual(e.target.value)}
-            />
+            /> */}
             <InputType
                 labelText={'Reason'}
                 inputType={'text'}

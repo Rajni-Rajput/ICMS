@@ -3,40 +3,6 @@ const userModel = require('../models/userModel');
 const middleware = require('../middlewares/middleware');
 const claimModel = require('../models/claimModel')
 
-// const postPolicy = async (req,res) =>{
-//     try {
-
-//         const { policyType, premium, coverage } = req.body;
-          
-//         // Check if the policy with the given policyId already exists
-//         const existingPolicy = await policyModel.findOne({email});
-//         if (existingPolicy) {
-//             return res.status(200).json({ message: "Policy with this policyId already exists" });
-//         }
-
-//         // Create a new policy
-//         const policy = new policyModel({
-//             policyType, 
-//             premium, 
-//             coverage
-//         });
-
-//         await policy.save();
-
-//         return res.status(201).json({
-//             success: true,
-//             message: 'Policy added successfully!',
-//             policy
-//         });
-//     } catch (error) {
-//         return res.status(500).send({
-//             success: false,
-//             message: 'Error in adding policy',
-//             error
-//         });
-//     }
-// }
-
 
 const listpolicyController = async(req,res) =>{
 
@@ -57,7 +23,6 @@ const listpolicyController = async(req,res) =>{
     }
 
 }
-
 const deletepolicyController = async (req, res) => {
     try {
         const policyId = req.body._id; 
@@ -86,8 +51,6 @@ const deletepolicyController = async (req, res) => {
         });
     }
 }
-
-
 const selectPolicy = async (req, res) => {
     const { email, policyType,premium,coverage} = req.body;
 
@@ -129,7 +92,6 @@ const selectPolicy = async (req, res) => {
         res.status(500).json({ message: "Internal server error" });
     }
 };
-
 const userPolicyList = async (req,res) => {
     const {email} =req.body
     try {
@@ -155,53 +117,51 @@ const userPolicyList = async (req,res) => {
         });
     }
 };
+const addClaim = async (req, res) => {
+    const { email, InsuranceId, reason, amount } = req.body;
 
+    try {
+        // Find the user by email
+        const user = await userModel.findOne({ email });
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
 
-// const claimPolicy = async(req,res) =>{
-//     const { email,InsuranceId,policyId, amount, reason, date, status} = req.body;
+        // Find the policy by InsuranceId
+        const policy = await policyModel.findOne({ _id: InsuranceId });
+        if (!policy) {
+            return res.status(404).json({ message: 'Policy not found' });
+        }
 
-//     try {
-//         // Find the user by email
-//         const user = await userModel.findOne({ email });
+        // Check if a claim already exists for the provided InsuranceId
+        const existingClaim = await claimModel.findOne({ InsuranceId });
+        if (existingClaim) {
+            return res.status(400).json({ message: 'Claim already exists for this InsuranceId' });
+        }
 
-//         if (!user) {
-//             return res.status(404).json({ message: 'User not found' });
-//         }
-//         claimId = 
+        // Create a new claim document
+        const newClaim = new claimModel({
+            email,
+            InsuranceId,
+            status: 'pending', // Assuming status is set to 'Pending' by default
+            amount,
+            reason,
+            residual_amount: policy.amount, // Set the residual amount to the policy amount initially
+        });
 
-//         // Fetch the user's policy and insurance ID
-//         // const { InsuranceId, policyId } = Policy;
+        // Save the new claim document
+        await newClaim.save();
 
-//         // // Find the policy associated with the user
-//         // const policy = await Policy.findOne({ InsuranceId, policyId });
+        return res.status(200).json({ 
+            message: 'Claim submitted successfully', 
+            claim: newClaim
+        });
 
-//         // if (!policy) {
-//         //     return res.status(404).json({ message: 'Policy not found for the user' });
-//         // }
-
-//         claim.claimId =
-
-//         await claim.save();
-
-//         return res.status(200).json({ 
-//             message: "Claim submitted successfully!", 
-//             claim: {
-//                 email: email,
-//                 amount: amount,
-//                 reason: reason,
-//                 status: "pending",
-//                 claimId: claim.claimId,
-//                 InsuranceId: InsuranceId,
-//                 policyId: policy.policy
-                
-//             }
-//         });
-
-//     } catch (err) {
-//         res.status(500).json({ message: err.message });
-//     }
-// }
-
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};
 const claimPolicy = async (req, res) => {
     const { email, InsuranceId, status, amount, reason, residual_amount } = req.body;
 
@@ -247,7 +207,6 @@ const claimPolicy = async (req, res) => {
         res.status(500).json({ message: "Internal server error" });
     }
 };
-
 const userClaimList = async (req,res) => {
     const {email} =req.body
     try {
@@ -314,7 +273,6 @@ const approveClaim = async (req, res) => {
         });
     }
 };
-
 const rejectClaim = async (req, res) => {
     try {
         const { _id, remarks } = req.body;
@@ -337,27 +295,6 @@ const rejectClaim = async (req, res) => {
         });
     }
 };
-// const addRemark = async (req, res) => {
-//     try {
-//         const { _id, status, remarks } = req.body;
-
-//         // Update claim status and remarks in the database
-//         const claim = await claimModel.findByIdAndUpdate(_id, { status, remarks }, { new: true });
-
-//         if (!claim) {
-//             return res.status(404).json({ message: 'Claim not found' });
-//         }
-
-//         return res.status(200).json({ message: `Claim ${status}d successfully`, claim });
-//     } catch (error) {
-//         console.error('Error:', error);
-//         return res.status(500).json({ message: 'Internal Server Error' });
-//     }
-// };
-
-
-// module.exports = {postPolicy,deletepolicyController,listpolicyController,selectPolicy,claimPolicy};
-module.exports = {listpolicyController,selectPolicy,userPolicyList,
-                    claimPolicy,userClaimList,listClaimController,deletepolicyController,
-                approveClaim,rejectClaim};
-                //,addRemark
+module.exports = {listpolicyController,selectPolicy,userPolicyList,claimPolicy,userClaimList,
+    listClaimController,deletepolicyController,approveClaim,rejectClaim,addClaim};
+              

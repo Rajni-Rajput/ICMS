@@ -16,7 +16,7 @@ const ClaimApprovalCard = ({ submitBtn, formTitle, claimId, setShowClaimApproval
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            let response;
+            
             if (approval === 'approve' || approval === 'reject') {
                 // Create an object with the necessary fields including remarks
                 const requestData = {
@@ -25,10 +25,10 @@ const ClaimApprovalCard = ({ submitBtn, formTitle, claimId, setShowClaimApproval
                     remarks: remarks // Include remarks in the request
                 };
                 if (approval === 'approve') {
-                    response = await axios.post('http://localhost:3033/api/v1/view/approveClaim', requestData);
+                    await axios.post('http://localhost:3033/api/v1/view/approveClaim', requestData);
                     alert('Claim approved successfully!');
                 } else {
-                    response = await axios.post('http://localhost:3033/api/v1/view/rejectClaim', requestData);
+                    await axios.post('http://localhost:3033/api/v1/view/rejectClaim', requestData);
                     alert('Claim rejected successfully!');
                 }
                 setShowClaimApprovalCard(false); // Hide the form after successful submission

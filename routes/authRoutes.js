@@ -7,5 +7,5 @@ router.post('/reg',registerController)
 //Login ||Post
 router.post('/login',loginController)
 //get current user ||get
-router.get('/current-user',authMiddelware,currentUserController)
+// router.get('/current-user',authMiddelware,currentUserController)
 module.exports = router

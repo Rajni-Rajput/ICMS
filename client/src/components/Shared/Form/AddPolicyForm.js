@@ -13,14 +13,15 @@ const PolicyForm = ({ submitBtn, formTitle , setShowPolicyForm}) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            let response;
+            
             const policyData = {
                 email,
                 policyType,
                 coverage,
                 premium
             };
-            response = await axios.post('http://localhost:3033/api/v1/view/selectPolicy', policyData);
+            
+            await axios.post('http://localhost:3033/api/v1/view/selectPolicy', policyData);
             // Handle success response here (e.g., show success message, update UI)
             alert('Policy added successfully!');
             setShowPolicyForm(false)
