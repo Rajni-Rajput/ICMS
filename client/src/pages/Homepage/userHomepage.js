@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import './adminPage.css'
 import { useNavigate,useLocation } from 'react-router-dom';
+
 import ClaimForm from '../../components/Shared/Form/AddClaimForm';
 
 const UserHomepage = () => {
